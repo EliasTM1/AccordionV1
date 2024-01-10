@@ -1,9 +1,9 @@
-type FAQ = {
+export type FAQ = {
 	title: string;
 	text: string;
 };
 
-export const faqs: FAQ[] = [
+export const faqsMocksData: FAQ[] = [
 	{
 		title: "Where are these chairs assembled?",
 		text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, quaerat temporibus quas dolore provident nisi ut aliquid ratione beatae sequi aspernatur veniam repellendus.",
