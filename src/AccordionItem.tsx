@@ -1,25 +1,28 @@
 import { Box, HStack, Text, Heading } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { useState } from "react";
 
 type ItemProps = {
 	title: string;
 	text: string;
 	counter: number;
+	// handleOpen: (count: number) => void;
+	handleOpen: (count: number) => void;
+	selected: number | null;
 };
 
-const AccordionItem = ({ text, title, counter }: ItemProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+const AccordionItem = ({ text, title, counter, handleOpen, selected }: ItemProps) => {
+	const shouldExpand: boolean = counter === selected
 
-	function toggleExpand() {
-		setIsOpen((previousState) => !previousState);
+
+	function toggleExpand(number : number) {
+		handleOpen(() => shouldExpand ? null : number);
 	}
 
 	return (
 		<Box
 			width='70%'
 			border='1px solid gray'
-			borderTop={isOpen ? "5px solid green" : ""}
+			borderTop={shouldExpand ? "5px solid green" : ""}
 			padding='2rem'
 			borderRadius='10px'
             backgroundColor="white"
@@ -29,14 +32,14 @@ const AccordionItem = ({ text, title, counter }: ItemProps) => {
 					{counter}. {title}
 				</Heading>
 				<Box cursor="pointer">
-					{!isOpen ? (
-						<AddIcon onClick={toggleExpand} />
+					{!shouldExpand ? (
+						<AddIcon onClick={() => toggleExpand(counter)} />
 					) : (
-						<MinusIcon onClick={toggleExpand} />
+						<MinusIcon onClick={() => toggleExpand(counter)} />
 					)}
 				</Box>
 			</HStack>
-			{isOpen ? (
+			{shouldExpand ? (
 				<Box>
 					<Text>{text}</Text>
 				</Box>

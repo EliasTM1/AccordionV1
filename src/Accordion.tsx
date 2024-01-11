@@ -1,17 +1,26 @@
 import { VStack } from "@chakra-ui/react";
 import AccordionItem from "./AccordionItem";
 import { FAQ } from "./mocks";
+import { useState } from "react";
 
 export type AccordionProps = {
 	data: FAQ[];
 };
 
 const Accordion = ({ data }: AccordionProps) => {
-	console.log(data);
+	const [currentOpen, setCurrentOpen] = useState<number>(0);
+	
 	return (
-		<VStack backgroundColor="beige">
+		<VStack backgroundColor='beige' height='100vh' pt='4rem'>
 			{data.map((item, index) => (
-				<AccordionItem text={item.text} title={item.title} counter={index + 1}/>
+				<AccordionItem
+					key={index}
+					selected={currentOpen}
+					handleOpen={setCurrentOpen}
+					text={item.text}
+					title={item.title}
+					counter={index}
+				/>
 			))}
 		</VStack>
 	);
