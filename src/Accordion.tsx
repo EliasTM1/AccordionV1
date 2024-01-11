@@ -8,7 +8,7 @@ export type AccordionProps = {
 };
 
 const Accordion = ({ data }: AccordionProps) => {
-	const [currentOpen, setCurrentOpen] = useState<number>(0);
+	const [currentOpen, setCurrentOpen] = useState<number | null>(0);
 	
 	return (
 		<VStack backgroundColor='beige' height='100vh' pt='4rem'>
